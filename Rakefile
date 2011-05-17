@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "vote-schulze"
   gem.homepage = "http://github.com/asaaki/vote-schulze"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Schulze method implementation in Ruby (Condorcet voting method)}
+  gem.description = %Q{This gem is a Ruby implementation of the Schulze voting method with help of the Floyd–Warshall algorithm, a type of the Condorcet voting methods.}
   gem.email = "chris@dinarrr.com"
   gem.authors = ["Christoph Grabo"]
   # dependencies defined in Gemfile
@@ -47,3 +47,4 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+

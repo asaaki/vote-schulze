@@ -1,18 +1,40 @@
-= vote-schulze
+# vote-schulze
 
-Description goes here.
+This gem is a Ruby implementation of the Schulze voting method with help of the Floyd–Warshall algorithm, a type of the Condorcet voting methods.
 
-== Contributing to vote-schulze
- 
+Wikipedia:
+
+* [Schulze method](http://en.wikipedia.org/wiki/Schulze_method) ([deutsch](http://de.wikipedia.org/wiki/Schulze-Methode))
+* [Floyd–Warshall algorithm](http://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm)
+
+## Install
+
+``` bash
+gem install vote-schulze
+```
+
+## Usage
+
+``` ruby
+require 'vote-schulze'
+vs = SchulzeBasic.new
+vs.load candidate_count, vote_list
+vs.run
+#=> [result as array]
+```
+
+## Contributing to vote-schulze
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
 * Fork the project
+* Use git-flow
 * Start a feature/bugfix branch
 * Commit and push until you are happy with your contribution
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-== Copyright
+## Copyright
 
 Copyright (c) 2011 Christoph Grabo. See LICENSE.txt for
 further details.
