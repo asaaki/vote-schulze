@@ -1,4 +1,5 @@
 # encoding: UTF-8
+
 module Vote
   module Condorcet
     module Schulze
