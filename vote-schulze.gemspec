@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{vote-schulze}
-  s.version = "0.0.1"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Christoph Grabo"]
-  s.date = %q{2011-05-17}
+  s.date = %q{2011-05-19}
   s.description = %q{This gem is a Ruby implementation of the Schulze voting method with help of the Floyd–Warshall algorithm, a type of the Condorcet voting methods.}
   s.email = %q{chris@dinarrr.com}
   s.extra_rdoc_files = [
@@ -26,7 +26,6 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "VERSION",
-    "lib/matrix_ext.rb",
     "lib/vote-schulze.rb",
     "lib/vote.rb",
     "lib/vote/condorcet.rb",
@@ -34,8 +33,10 @@ Gem::Specification.new do |s|
     "lib/vote/condorcet/schulze/basic.rb",
     "lib/vote/condorcet/schulze/input.rb",
     "lib/vote/condorcet/schulze/win_and_lost.rb",
+    "lib/vote/matrix.rb",
     "spec/spec_helper.rb",
-    "spec/vote-schulze_spec.rb"
+    "spec/vote-schulze_spec.rb",
+    "vote-schulze.gemspec"
   ]
   s.homepage = %q{http://github.com/asaaki/vote-schulze}
   s.licenses = ["MIT"]
