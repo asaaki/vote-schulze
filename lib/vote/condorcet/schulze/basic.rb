@@ -1,29 +1,16 @@
 # encoding: UTF-8
-require 'matrix'
 
 module Vote
   module Condorcet
     module Schulze
 
       class Basic
-        @candidate_count = 0
-        @vote_matrix = nil
-        @play_matrix = nil
-        @result_matrix = nil
-        @ranking = nil
 
-        def initialize candidate_count=0, vote_matrix=nil
-          if candidate_count > 0 && vote_matrix != nil
-            load
-          end
-          true
+        def initialize
+          #self
         end
 
         def load candidate_count, vote_matrix
-
-          @play_matrix = nil
-          @result_matrix = nil
-          @ranking = nil
 
           @candidate_count = candidate_count
 
@@ -37,13 +24,11 @@ module Vote
           self
         end
 
-        def vote_matrix
-          @vote_matrix
-        end
+        private
 
         def play
 
-          @play_matrix ||= Matrix.scalar(@candidate_count,0)
+          @play_matrix = ::Matrix.scalar(@candidate_count,0).extend(Vote::Matrix)
 
           # step 1: find matches with wins
           @candidate_count.times do |i|
@@ -70,31 +55,26 @@ module Vote
             end
           end
 
-          true
+          self
         end
 
-        def play_matrix
-          @play_matrix
-        end
 
         def result
-          @result_matrix ||= Matrix.scalar(@candidate_count,0)
+
+          @result_matrix = ::Matrix.scalar(@candidate_count,0).extend(Vote::Matrix)
 
           @result_matrix.each_with_index do |e,x,y|
             next if x==y
             @result_matrix[x,y] = e+1 if @play_matrix[x,y] > @play_matrix[y,x]
           end
 
-          true
+          self
         end
 
-        def result_matrix
-          @result_matrix
-        end
 
         def rank
 
-          @ranking ||= Array.new(@candidate_count,0)
+          @ranking = Array.new(@candidate_count,0)
 
           @result_matrix.row_vectors.each_with_index do |v,i|
             v.to_a.map do |e|
@@ -102,23 +82,42 @@ module Vote
             end
           end
 
-          true
+          self
         end
 
-        def ranking_array
-          @ranking
-        end
+        public
 
         def run
           play
           result
           rank
+        end
+
+        def vote_matrix
+          @vote_matrix
+        end
+        def play_matrix
+          @play_matrix
+        end
+        def result_matrix
+          @result_matrix
+        end
+        def ranking_array
           @ranking
         end
 
-      end
 
-    end
-  end
-end
+        # All-in-One class method to get a calculated SchulzeBasic object
+        def self.do candidate_count, vote_matrix
+          instance = new
+          instance.load candidate_count, vote_matrix
+          instance.run
+          instance
+        end
+
+      end #Basic
+
+    end #Schulze
+  end #Condorcet
+end #Vote
 

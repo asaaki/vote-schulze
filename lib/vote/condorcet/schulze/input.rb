@@ -1,5 +1,4 @@
 # encoding: UTF-8
-require 'matrix'
 
 module Vote
   module Condorcet
@@ -10,7 +9,7 @@ module Vote
         @vote_matrix = nil
 
         def initialize candidate_count, vote_list
-          @vote_matrix = Matrix.scalar(candidate_count,0)
+          @vote_matrix = ::Matrix.scalar(candidate_count,0).extend(Vote::Matrix)
           insert_vote_array(vote_list) if vote_list.is_a?(Array)
           insert_vote_file(vote_list) if vote_list.is_a?(File)
         end
