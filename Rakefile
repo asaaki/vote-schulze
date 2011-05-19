@@ -18,7 +18,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/asaaki/vote-schulze"
   gem.license = "MIT"
   gem.summary = %Q{Schulze method implementation in Ruby (Condorcet voting method)}
-  gem.description = %Q{This gem is a Ruby implementation of the Schulze voting method with help of the Floyd–Warshall algorithm, a type of the Condorcet voting methods.}
+  gem.description = %Q{This gem is a Ruby implementation of the Schulze voting method (with help of the Floyd–Warshall algorithm), a type of the Condorcet voting methods.}
   gem.email = "chris@dinarrr.com"
   gem.authors = ["Christoph Grabo"]
   # dependencies defined in Gemfile
