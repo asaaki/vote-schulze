@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{vote-schulze}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Christoph Grabo"]
-  s.date = %q{2011-05-19}
-  s.description = %q{This gem is a Ruby implementation of the Schulze voting method with help of the Floyd–Warshall algorithm, a type of the Condorcet voting methods.}
+  s.date = %q{2011-05-22}
+  s.description = %q{This gem is a Ruby implementation of the Schulze voting method (with help of the Floyd–Warshall algorithm), a type of the Condorcet voting methods.}
   s.email = %q{chris@dinarrr.com}
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -26,6 +26,8 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "VERSION",
+    "examples/vote4.list",
+    "examples/vote6.list",
     "lib/vote-schulze.rb",
     "lib/vote.rb",
     "lib/vote/condorcet.rb",
@@ -48,21 +50,18 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<rspec>, ["~> 2.3.0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6.0"])
-      s.add_development_dependency(%q<rcov>, [">= 0"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.3.0"])
     else
-      s.add_dependency(%q<rspec>, ["~> 2.3.0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.6.0"])
-      s.add_dependency(%q<rcov>, [">= 0"])
+      s.add_dependency(%q<rspec>, ["~> 2.3.0"])
     end
   else
-    s.add_dependency(%q<rspec>, ["~> 2.3.0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.6.0"])
-    s.add_dependency(%q<rcov>, [">= 0"])
+    s.add_dependency(%q<rspec>, ["~> 2.3.0"])
   end
 end
 
