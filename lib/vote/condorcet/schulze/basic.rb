@@ -6,40 +6,32 @@ module Vote
 
       class Basic
 
-        def initialize
-          #self
-        end
-
-        def load candidate_count, vote_matrix
-
-          @candidate_count = candidate_count
-
-          @vote_matrix = vote_matrix.is_a?(Vote::Condorcet::Schulze::Input) ? \
-            vote_matrix.matrix : \
+        def load vote_matrix, candidate_count=nil
+          input = vote_matrix.is_a?(Vote::Condorcet::Schulze::Input) ? \
+            vote_matrix : \
             Vote::Condorcet::Schulze::Input.new(
-              candidate_count,
-              vote_matrix
-            ).matrix
-
+              vote_matrix,
+              candidate_count
+            )
+          @vote_matrix = input.matrix
+          @candidate_count = input.candidates
+          @vote_count = input.voters
           self
         end
 
         private
 
         def play
-
           @play_matrix = ::Matrix.scalar(@candidate_count,0).extend(Vote::Matrix)
-
           # step 1: find matches with wins
           @candidate_count.times do |i|
             @candidate_count.times do |j|
               next if i==j
               if @vote_matrix[i,j] > @vote_matrix[j,i]
                 @play_matrix[i,j] = @vote_matrix[i,j]
-              end
-            end
-          end
-
+              end #loop3
+            end #loop2
+          end #loop1
           #step 2: find strongest pathes
           @candidate_count.times do |i|
             @candidate_count.times do |j|
@@ -51,38 +43,34 @@ module Vote
                   @play_matrix[j,k],
                   [ @play_matrix[j,i], @play_matrix[i,k] ].min
                   ].max
-              end
-            end
-          end
-
-          self
-        end
+              end #loop3
+            end #loop2
+          end #loop1
+        end #def
 
 
         def result
-
           @result_matrix = ::Matrix.scalar(@candidate_count,0).extend(Vote::Matrix)
-
           @result_matrix.each_with_index do |e,x,y|
             next if x==y
             @result_matrix[x,y] = e+1 if @play_matrix[x,y] > @play_matrix[y,x]
           end
-
-          self
         end
 
-
         def rank
+          @ranking = @result_matrix.
+            row_vectors.map { |e| e.inject(0) { |s,v| s += v } }
+        end
 
-          @ranking = Array.new(@candidate_count,0)
-
-          @result_matrix.row_vectors.each_with_index do |v,i|
-            v.to_a.map do |e|
-              @ranking[i] += e
-            end
-          end
-
-          self
+        def rank_abc
+          r = @ranking
+          rmax = r.max
+          abc = r.map{|e|
+            [e,(r.index(e)+65).chr] # => [int,letter]
+            }.
+            sort.reverse. # bring in correct order
+            map{|e| "#{e[1]}:#{rmax-e[0]+1}" } # => "letter:int"
+          @ranking_abc = abc
         end
 
         public
@@ -91,6 +79,7 @@ module Vote
           play
           result
           rank
+          rank_abc
         end
 
         def vote_matrix
@@ -102,15 +91,20 @@ module Vote
         def result_matrix
           @result_matrix
         end
-        def ranking_array
+        def ranks
           @ranking
         end
-
+        def ranks_abc
+          @ranking_abc
+        end
+        def voters
+          @vote_count
+        end
 
         # All-in-One class method to get a calculated SchulzeBasic object
-        def self.do candidate_count, vote_matrix
+        def self.do vote_matrix, candidate_count=nil
           instance = new
-          instance.load candidate_count, vote_matrix
+          instance.load vote_matrix, candidate_count
           instance.run
           instance
         end
