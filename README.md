@@ -146,6 +146,7 @@ Reference calculation: [Schulze Methode | blog.cgiesel.de (german)](http://blog.
 Example file under `examples/vote4.list`
 
 Result should be:
+
 ``` ruby
 sb = SchulzeBasic.do File.open('../examples/vote4.list')
 sb.rank_abc
