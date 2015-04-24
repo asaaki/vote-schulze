@@ -5,63 +5,45 @@
 
 Gem::Specification.new do |s|
   s.name = %q{vote-schulze}
-  s.version = "0.2.0"
+  s.version = '2.0.0'
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Christoph Grabo"]
-  s.date = %q{2011-05-22}
+  s.required_rubygems_version = Gem::Requirement.new('>= 0') if s.respond_to? :required_rubygems_version=
+  s.authors = ['Alessandro Rodi', 'Christoph Grabo']
+  s.date = %q{2015-02-07}
   s.description = %q{This gem is a Ruby implementation of the Schulze voting method (with help of the Floyd-Warshall algorithm), a type of the Condorcet voting methods.}
-  s.email = %q{chris@dinarrr.com}
+  s.email = %q{coorasse@gmail.com}
   s.extra_rdoc_files = [
-    "LICENSE.txt",
-    "README.md"
+    'LICENSE.txt',
+    'README.md'
   ]
   s.files = [
-    ".document",
-    ".rspec",
-    ".rvmrc",
-    "Gemfile",
-    "Gemfile.lock",
-    "LICENSE.txt",
-    "README.md",
-    "Rakefile",
-    "VERSION",
-    "examples/vote4.list",
-    "examples/vote6.list",
-    "lib/vote-schulze.rb",
-    "lib/vote.rb",
-    "lib/vote/condorcet.rb",
-    "lib/vote/condorcet/schulze.rb",
-    "lib/vote/condorcet/schulze/basic.rb",
-    "lib/vote/condorcet/schulze/input.rb",
-    "lib/vote/condorcet/schulze/win_and_lost.rb",
-    "lib/vote/matrix.rb",
-    "spec/spec_helper.rb",
-    "spec/vote-schulze_spec.rb",
-    "vote-schulze.gemspec"
+    '.document',
+    '.rspec',
+    'Gemfile',
+    'Gemfile.lock',
+    'LICENSE.txt',
+    'README.md',
+    'Rakefile',
+    'VERSION',
+    'examples/vote4.list',
+    'examples/vote6.list',
+    'lib/vote-schulze.rb',
+    'lib/vote.rb',
+    'lib/vote/condorcet.rb',
+    'lib/vote/condorcet/schulze.rb',
+    'lib/vote/condorcet/schulze/basic.rb',
+    'lib/vote/condorcet/schulze/input.rb',
+    'lib/vote/condorcet/schulze/win_and_lost.rb',
+    'lib/vote/matrix.rb',
+    'spec/spec_helper.rb',
+    'spec/vote-schulze_spec.rb',
+    'vote-schulze.gemspec'
   ]
-  s.homepage = %q{http://github.com/asaaki/vote-schulze}
-  s.licenses = ["MIT"]
-  s.require_paths = ["lib"]
+  s.homepage = %q{http://github.com/coorasse/vote-schulze}
+  s.licenses = ['MIT']
+  s.require_paths = ['lib']
   s.rubygems_version = %q{1.6.2}
   s.summary = %q{Schulze method implementation in Ruby (Condorcet voting method)}
 
-  if s.respond_to? :specification_version then
-    s.specification_version = 3
-
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.6.0"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.3.0"])
-    else
-      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
-      s.add_dependency(%q<jeweler>, ["~> 1.6.0"])
-      s.add_dependency(%q<rspec>, ["~> 2.3.0"])
-    end
-  else
-    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
-    s.add_dependency(%q<jeweler>, ["~> 1.6.0"])
-    s.add_dependency(%q<rspec>, ["~> 2.3.0"])
-  end
 end
 

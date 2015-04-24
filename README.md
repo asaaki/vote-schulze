@@ -1,10 +1,8 @@
-# vote-schulze
+# Vote Schulze
 
-This gem is a Ruby implementation of the Schulze voting method (with help of the Floyd–Warshall algorithm), a type of the Condorcet voting methods.
+This gem is a Ruby implementation of the Schulze voting method (with help of the Floyd–Warshall algorithm), 
+a type of the Condorcet voting methods.
 
-**Very alpha! Only basic functionality. No tests yet!**
-
-(If you want to write the tests: fork, write, test, push request - Thanks!)
 
 Wikipedia:
 
@@ -14,7 +12,7 @@ Wikipedia:
 ## Install
 
 ``` bash
-gem install vote-schulze
+gem install vote-schulze, github: 'coorasse/vote-schulze'
 ```
 
 ## Usage
