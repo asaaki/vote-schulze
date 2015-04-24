@@ -6,7 +6,7 @@
 module Vote
   module Matrix
 
-    def []=(i,j,v)
+    def []=(i, j, v)
       @rows[i][j] = v
     end
 
