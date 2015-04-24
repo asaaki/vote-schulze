@@ -235,7 +235,6 @@ EOF
 
       vs = SchulzeBasic.do votestring, 4
       expect(vs.ranks).to eq [0, 1, 0, 1]  # B > C, D > A
-      puts vs.ranks_abc
       # we have more possible solutions here:
       # B > C > D > A
       # B > D > A > C
@@ -244,6 +243,31 @@ EOF
       # D > B > A > C
       # D > B > C > A
       # so the solution is B and D are preferred over A and C
+    end
+
+    it 'example 1 from airesis' do
+      votestring = <<EOF
+1=C;A;D;B
+1=D;C;A;B
+1=C;D;A;B
+1=B;D;A;C
+2=A;D;C;B
+EOF
+      # beat matrix
+      # ___|_A_|_B_|_C_|_D_|
+      #  A |   | 5 | 0 | 0 |
+      #  B | 0 |   | 0 | 0 |
+      #  C | 0 | 5 |   | 0 |
+      #  D | 0 | 5 | 4 |   |
+      vs = SchulzeBasic.do votestring, 4
+      expect(vs.ranks).to eq [1, 0, 1, 2]
+      # D = 2, A = 1, C = 1, B = 0
+      # p[A,X] >= p[X,A] for every X? YES
+      # p[B,X] >= p[X,B] for every X? NO
+      # p[C,X] >= p[X,B] for every X? NO
+      # p[D,X] >= p[X,D] for every X? YES
+      puts vs.play_matrix
+
     end
   end
 end
