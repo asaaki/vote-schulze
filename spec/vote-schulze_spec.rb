@@ -2,12 +2,14 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe 'VoteSchulze' do
 
+
   describe 'really simple vote with A=B' do
     it 'can solve a simple votation' do
       # the vote is A > B
       votestring = 'A,B'
       vs = SchulzeBasic.do votestring, 2
       expect(vs.ranks).to eq [0, 0]
+
     end
 
     it 'can solve a simple votation with the number of votes preceeding' do
@@ -183,7 +185,7 @@ EOF
 8=E;B;A;D;C
 EOF
       vs = SchulzeBasic.do votestring, 5
-      expect(vs.ranks).to eq [3, 1, 2, 0, 4]  # E > A > C > B > D
+      expect(vs.ranks).to eq [3, 1, 2, 0, 4] # E > A > C > B > D
     end
 
     it 'example 2 from wikipedia' do
@@ -199,7 +201,7 @@ EOF
 4=D;C;B;A
 EOF
       vs = SchulzeBasic.do votestring, 4
-      expect(vs.ranks).to eq [2, 0, 1, 3]  # D > A > C > B
+      expect(vs.ranks).to eq [2, 0, 1, 3] # D > A > C > B
     end
 
     it 'example 3 from wikipedia' do
@@ -215,7 +217,7 @@ EOF
 5=D;E;C;A;B
 EOF
       vs = SchulzeBasic.do votestring, 5
-      expect(vs.ranks).to eq [3, 4, 0, 2, 1]  # B > A > D > E > C
+      expect(vs.ranks).to eq [3, 4, 0, 2, 1] # B > A > D > E > C
     end
 
 
@@ -234,7 +236,7 @@ EOF
       #  D | 6 | 4 | 4 |   |
 
       vs = SchulzeBasic.do votestring, 4
-      expect(vs.ranks).to eq [0, 1, 0, 1]  # B > C, D > A
+      expect(vs.ranks).to eq [0, 1, 0, 1] # B > C, D > A
       # we have more possible solutions here:
       # B > C > D > A
       # B > D > A > C
@@ -261,13 +263,12 @@ EOF
       #  D | 0 | 5 | 4 |   |
       vs = SchulzeBasic.do votestring, 4
       expect(vs.ranks).to eq [1, 0, 1, 2]
+      expect(vs.winners_array).to eq [1, 0, 0, 1]
       # D = 2, A = 1, C = 1, B = 0
       # p[A,X] >= p[X,A] for every X? YES
       # p[B,X] >= p[X,B] for every X? NO
       # p[C,X] >= p[X,B] for every X? NO
       # p[D,X] >= p[X,D] for every X? YES
-      puts vs.play_matrix
-
     end
   end
 end

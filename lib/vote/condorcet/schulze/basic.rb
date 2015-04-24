@@ -5,12 +5,14 @@ module Vote
     module Schulze
       class Basic
         def load vote_matrix, candidate_count=nil
-          input = vote_matrix.is_a?(Vote::Condorcet::Schulze::Input) ? \
-            vote_matrix : \
-            Vote::Condorcet::Schulze::Input.new(
-              vote_matrix,
-              candidate_count
-          )
+          input = if vote_matrix.is_a?(Vote::Condorcet::Schulze::Input)
+                    vote_matrix
+                  else
+                    Vote::Condorcet::Schulze::Input.new(
+                        vote_matrix,
+                        candidate_count
+                    )
+                  end
           @vote_matrix = input.matrix
           @candidate_count = input.candidates
           @vote_count = input.voters
@@ -56,6 +58,15 @@ module Vote
           end
         end
 
+        def calculate_winners
+          @winners_array = Array.new(@candidate_count,0)
+          @winners_array.each_with_index do |el, idx|
+            unless @play_matrix.row(idx).any? { |r| @play_matrix.column(idx).any? { |v| v > r } }
+              @winners_array[idx] = 1
+            end
+          end
+        end
+
         def rank
           @ranking = @result_matrix.
               row_vectors.map { |e| e.inject(0) { |s, v| s += v } }
@@ -65,7 +76,7 @@ module Vote
           r = @ranking
           rmax = r.max
           abc = r.map { |e|
-            [e, (r.index(e)+65).chr] # => [int,letter]
+            [e, self.class.idx_to_chr(r.index(e))] # => [int,letter]
           }.
               sort.reverse.# bring in correct order
           map { |e| "#{e[1]}:#{rmax-e[0]+1}" } # => "letter:int"
@@ -75,9 +86,14 @@ module Vote
 
         public
 
+        def self.idx_to_chr(idx)
+          (idx+65).chr
+        end
+
         def run
           play
           result
+          calculate_winners
           rank
           rank_abc
         end
@@ -106,6 +122,12 @@ module Vote
           @vote_count
         end
 
+        # return all possible solutions to the votation
+        def winners_array
+          @winners_array
+        end
+
+
         # All-in-One class method to get a calculated SchulzeBasic object
         def self.do vote_matrix, candidate_count=nil
           instance = new
@@ -113,10 +135,8 @@ module Vote
           instance.run
           instance
         end
-
-      end #Basic
-
-    end #Schulze
-  end #Condorcet
-end #Vote
+      end
+    end
+  end
+end
 
