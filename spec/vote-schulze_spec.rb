@@ -9,7 +9,7 @@ describe 'VoteSchulze' do
       votestring = 'A,B'
       vs = SchulzeBasic.do votestring, 2
       expect(vs.ranks).to eq [0, 0]
-
+      #expect(vs.ranks_abc).to eq(['A:1', 'B:1'])
     end
 
     it 'can solve a simple votation with the number of votes preceeding' do
@@ -269,6 +269,14 @@ EOF
       # p[B,X] >= p[X,B] for every X? NO
       # p[C,X] >= p[X,B] for every X? NO
       # p[D,X] >= p[X,D] for every X? YES
+    end
+  end
+
+  describe 'from file' do
+    it 'scan example4' do
+      sb = SchulzeBasic.do File.open('spec/support/examples/vote4.list')
+      expect(sb.ranks_abc).to eq(['C:1', 'D:2', 'B:3', 'A:4'])
+      expect(sb.ranks).to eq([0, 1, 3, 2])
     end
   end
 end

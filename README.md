@@ -135,7 +135,8 @@ Internally it will only check if candidate X > candidate Y
 
 Output:
 
-* `.ranking_array` Array: numbers of total wins for each candidate `[candidate A, candidate B, candidate C, ...]`
+* `.ranks` Array: numbers of total wins for each candidate `[candidate A, candidate B, candidate C, ...]`
+* `.winners_array` Array: set 1 if the candidate is a potential winner `[candidate A, candidate B, candidate C, ...]`
 
 ## Example
 
@@ -165,6 +166,11 @@ The result strings are always in format `Candidate:Position`, because it's possi
 * Commit and push until you are happy with your contribution
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+
+## TODO
+
+* ranks_abc method doesn't work properly
+* Implement a Tie-Breaking Ranking of the Candidates alghoritm
 
 ## Copyright
 

@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module Vote
   module Condorcet
     module Schulze
@@ -54,12 +52,12 @@ module Vote
           @result_matrix = ::Matrix.scalar(@candidate_count, 0).extend(Vote::Matrix)
           @result_matrix.each_with_index do |e, x, y|
             next if x == y
-            @result_matrix[x, y] = e+1 if @play_matrix[x, y] > @play_matrix[y, x]
+            @result_matrix[x, y] = e + 1 if @play_matrix[x, y] > @play_matrix[y, x]
           end
         end
 
         def calculate_winners
-          @winners_array = Array.new(@candidate_count,0)
+          @winners_array = Array.new(@candidate_count, 0)
           @winners_array.each_with_index do |el, idx|
             unless @play_matrix.row(idx).any? { |r| @play_matrix.column(idx).any? { |v| v > r } }
               @winners_array[idx] = 1
@@ -79,7 +77,7 @@ module Vote
             [e, self.class.idx_to_chr(r.index(e))] # => [int,letter]
           }.
               sort.reverse.# bring in correct order
-          map { |e| "#{e[1]}:#{rmax-e[0]+1}" } # => "letter:int"
+          map { |e| "#{e[1]}:#{rmax - e[0] + 1}" } # => "letter:int"
           @ranking_abc = abc
         end
 
@@ -87,7 +85,7 @@ module Vote
         public
 
         def self.idx_to_chr(idx)
-          (idx+65).chr
+          (idx + 65).chr
         end
 
         def run
@@ -127,7 +125,6 @@ module Vote
           @winners_array
         end
 
-
         # All-in-One class method to get a calculated SchulzeBasic object
         def self.do vote_matrix, candidate_count=nil
           instance = new
@@ -139,4 +136,3 @@ module Vote
     end
   end
 end
-
