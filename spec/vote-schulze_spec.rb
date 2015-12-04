@@ -238,41 +238,13 @@ EOF
       expect(vs.winners_array).to eq [0, 0, 0, 0] # B > C, D > A
       #puts vs.winners_array
 
-
-      solutions = %w(A B C D)
-
-      potentials = []
-      vs.ranks.each_with_index do |val, idx|
-        if val > 0
-          potentials << solutions[idx]
-          puts "#{solutions[idx]} is a potential winner"
-        end
-      end
-
-      beated = []
-      solutions.each_with_index do |val, idx|
-        solutions.each_with_index do |val2, idx2|
-          if vs.play_matrix[idx, idx2] > vs.play_matrix[idx2, idx]
-            beated << [val2, val]
-            puts "#{val} is better then #{val2}"
-          end
-        end
-      end
-
-      puts "possible solutions"
-      permutations = solutions.permutation
-
-      filtered_1 = []
-      permutations.each do |array|
-        if potentials.include? array[0]
-          filtered_1 << array if beated.all? do |couple|
-            array.index(couple[0]) > array.index(couple[1])
-          end
-        end
-      end
-
-      filtered_1.each do |array|
-        puts array.to_s
+      [[1, 2, 3, 0],
+       [1, 3, 0, 2],
+       [1, 3, 2, 0],
+       [3, 0, 1, 2],
+       [3, 1, 0, 2],
+       [3, 1, 2, 0]].each do |array|
+        expect(vs.classifications).to include array
       end
 
       # we have more possible solutions here:

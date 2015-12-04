@@ -81,6 +81,36 @@ module Vote
           @ranking_abc = abc
         end
 
+        def calculate_classifications
+          potentials = []
+          ranks = @ranking
+          ranks.each_with_index do |val, idx|
+            if val > 0
+              potentials << idx
+            end
+          end
+
+          beated = []
+          ranks.each_with_index do |val, idx|
+            ranks.each_with_index do |val2, idx2|
+              next if idx == idx2
+              if @play_matrix[idx, idx2] > @play_matrix[idx2, idx]
+                beated << [idx2, idx]
+              end
+            end
+          end
+
+          permutations = (0..ranks.length-1).to_a.permutation
+
+          classifications = permutations.map do |array|
+            next unless potentials.include? array[0]
+            next unless beated.all? { |couple| array.index(couple[0]) > array.index(couple[1]) }
+            array
+          end
+
+          @classifications = classifications.compact
+        end
+
 
         public
 
@@ -94,6 +124,7 @@ module Vote
           calculate_winners
           rank
           rank_abc
+          calculate_classifications
         end
 
         def vote_matrix
@@ -123,6 +154,10 @@ module Vote
         # return all possible solutions to the votation
         def winners_array
           @winners_array
+        end
+
+        def classifications
+          @classifications
         end
 
         # All-in-One class method to get a calculated SchulzeBasic object
