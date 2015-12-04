@@ -70,17 +70,6 @@ module Vote
               row_vectors.map { |e| e.inject(0) { |s, v| s += v } }
         end
 
-        def rank_abc
-          r = @ranking
-          rmax = r.max
-          abc = r.map { |e|
-            [e, self.class.idx_to_chr(r.index(e))] # => [int,letter]
-          }.
-              sort.reverse.# bring in correct order
-          map { |e| "#{e[1]}:#{rmax - e[0] + 1}" } # => "letter:int"
-          @ranking_abc = abc
-        end
-
         def calculate_classifications
           potentials = []
           ranks = @ranking
@@ -123,7 +112,6 @@ module Vote
           result
           calculate_winners
           rank
-          rank_abc
           calculate_classifications
         end
 
@@ -141,10 +129,6 @@ module Vote
 
         def ranks
           @ranking
-        end
-
-        def ranks_abc
-          @ranking_abc
         end
 
         def voters
