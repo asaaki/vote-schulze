@@ -78,9 +78,7 @@ module Vote
         def voters
           @vote_count
         end
-
       end
-
     end
   end
 end

@@ -1,8 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe 'VoteSchulze' do
-
-
   describe 'really simple vote with A=B' do
     it 'can solve a simple votation' do
       # the vote is A > B
@@ -13,21 +11,21 @@ describe 'VoteSchulze' do
     end
 
     it 'can solve a simple votation with the number of votes preceeding' do
-      # the vote is A > B
+      # the vote is A = B
       votestring = '1=A,B'
       vs = SchulzeBasic.do votestring, 2
       expect(vs.ranks).to eq [0, 0]
     end
 
     it 'with two votes the result is the same' do
-      # the vote is A > B
+      # the vote is A = B
       votestring = '2=A,B'
       vs = SchulzeBasic.do votestring, 2
       expect(vs.ranks).to eq [0, 0]
     end
 
     it 'with hundred votes the result is the same' do
-      # the vote is A > B
+      # the vote is A = B
       votestring = '100=A,B'
       vs = SchulzeBasic.do votestring, 2
       expect(vs.ranks).to eq [0, 0]
@@ -237,6 +235,46 @@ EOF
 
       vs = SchulzeBasic.do votestring, 4
       expect(vs.ranks).to eq [0, 1, 0, 1] # B > C, D > A
+      expect(vs.winners_array).to eq [0, 0, 0, 0] # B > C, D > A
+      #puts vs.winners_array
+
+
+      solutions = %w(A B C D)
+
+      potentials = []
+      vs.ranks.each_with_index do |val, idx|
+        if val > 0
+          potentials << solutions[idx]
+          puts "#{solutions[idx]} is a potential winner"
+        end
+      end
+
+      beated = []
+      solutions.each_with_index do |val, idx|
+        solutions.each_with_index do |val2, idx2|
+          if vs.play_matrix[idx, idx2] > vs.play_matrix[idx2, idx]
+            beated << [val2, val]
+            puts "#{val} is better then #{val2}"
+          end
+        end
+      end
+
+      puts "possible solutions"
+      permutations = solutions.permutation
+
+      filtered_1 = []
+      permutations.each do |array|
+        if potentials.include? array[0]
+          filtered_1 << array if beated.all? do |couple|
+            array.index(couple[0]) > array.index(couple[1])
+          end
+        end
+      end
+
+      filtered_1.each do |array|
+        puts array.to_s
+      end
+
       # we have more possible solutions here:
       # B > C > D > A
       # B > D > A > C
@@ -270,6 +308,26 @@ EOF
       # p[C,X] >= p[X,B] for every X? NO
       # p[D,X] >= p[X,D] for every X? YES
     end
+  end
+
+  it 'example 2 from airesis' do
+    votestring = <<EOF
+F;D;G;E;A;B;C
+G;E;D;A;B,C;F
+F;G;D;B,E;A;C
+F;D;G;E;A,B,C
+B,E,F;A,C,D,G
+A,B,E,G;D;C,F
+A,B,C,G;D,E;F
+G;E;D;F;A;C;B
+C,F;B,G;A,E;D
+E;A,B,C,D,F,G
+B,E,G;A,F;C;D
+EOF
+
+    vs = SchulzeBasic.do votestring, 7
+    expect(vs.ranks).to eq [1, 2, 0, 2, 5, 4, 6]
+    expect(vs.winners_array).to eq [0, 0, 0, 0, 0, 0, 1]
   end
 
   describe 'from file' do
