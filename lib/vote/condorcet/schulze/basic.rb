@@ -7,8 +7,8 @@ module Vote
                     vote_matrix
                   else
                     Vote::Condorcet::Schulze::Input.new(
-                        vote_matrix,
-                        candidate_count
+                      vote_matrix,
+                      candidate_count
                     )
                   end
           @vote_matrix = input.matrix
@@ -40,8 +40,8 @@ module Vote
               @candidate_count.times do |k|
                 next if (i == k) || (j == k)
                 @play_matrix[j, k] = [
-                    @play_matrix[j, k],
-                    [@play_matrix[j, i], @play_matrix[i, k]].min
+                  @play_matrix[j, k],
+                  [@play_matrix[j, i], @play_matrix[i, k]].min
                 ].max
               end
             end
@@ -67,39 +67,76 @@ module Vote
 
         def rank
           @ranking = @result_matrix.
-              row_vectors.map { |e| e.inject(0) { |s, v| s += v } }
+            row_vectors.map { |e| e.inject(0) { |s, v| s += v } }
         end
 
         def calculate_classifications
-          potentials = []
+          @potentials = []
           ranks = @ranking
           ranks.each_with_index do |val, idx|
             if val > 0
-              potentials << idx
+              @potentials << idx
             end
           end
 
-          beated = []
+          @beated = []
           ranks.each_with_index do |val, idx|
             ranks.each_with_index do |val2, idx2|
               next if idx == idx2
               if @play_matrix[idx, idx2] > @play_matrix[idx2, idx]
-                beated << [idx2, idx]
+                @beated << [idx, idx2]
               end
             end
           end
 
-          permutations = (0..ranks.length-1).to_a.permutation
-
-          classifications = permutations.map do |array|
-            next unless potentials.include? array[0]
-            next unless beated.all? { |couple| array.index(couple[0]) > array.index(couple[1]) }
-            array
+          def ranke(el)
+            rank = 0
+            rank -= 100 if @potentials.include?(el)
+            @beated.each do |b|
+              rank -= 1 if b[0] == el
+            end
+            rank
           end
 
-          @classifications = classifications.compact
+          start_list = (0..ranks.length-1).to_a
+          start_list.sort!{|e1, e2| ranke(e1) <=> ranke(e2)}
+
+          classifications = []
+          compute_classifications(classifications, [], @potentials, @beated, start_list)
+          @classifications = classifications
         end
 
+        def compute_classifications(classifications, classif = [], potential_winners, beated_list, start_list)
+          if beated_list.empty?
+            start_list.permutation.each do |array|
+              classifications << classif + array
+            end
+          else
+            if classif.empty? && potential_winners.any?
+              potential_winners.each do |element|
+                add_element(classifications, classif, nil, beated_list, start_list, element)
+              end
+            else
+              start_list.each do |element|
+                add_element(classifications, classif, nil, beated_list, start_list, element)
+              end
+            end
+          end
+        end
+
+        def add_element(classifications, classif, potential_winners, beated_list, start_list, element)
+          return if beated_list.any? { |c| c[1] == element }
+          classification = classif.clone
+          classification << element
+          next_beated_list = beated_list.clone.delete_if { |c| c[0] == element }
+          next_start_list = start_list.clone
+          next_start_list.delete(element)
+          if next_start_list.empty?
+            classifications << classification
+          else
+            compute_classifications(classifications, classification, nil, next_beated_list, next_start_list)
+          end
+        end
 
         public
 

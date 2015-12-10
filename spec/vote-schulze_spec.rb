@@ -153,6 +153,10 @@ B;A;C
 EOF
       vs = SchulzeBasic.do votestring, 3
       expect(vs.ranks).to eq [0, 0, 0]
+
+      [0, 1, 2].permutation.each do |array|
+        expect(vs.classifications).to include array
+      end
     end
 
     it 'B wins' do
@@ -236,7 +240,6 @@ EOF
       vs = SchulzeBasic.do votestring, 4
       expect(vs.ranks).to eq [0, 1, 0, 1] # B > C, D > A
       expect(vs.winners_array).to eq [0, 0, 0, 0] # B > C, D > A
-      #puts vs.winners_array
 
       [[1, 2, 3, 0],
        [1, 3, 0, 2],
@@ -246,6 +249,7 @@ EOF
        [3, 1, 2, 0]].each do |array|
         expect(vs.classifications).to include array
       end
+      expect(vs.classifications.size).to eq 6
 
       # we have more possible solutions here:
       # B > C > D > A
@@ -305,7 +309,6 @@ EOF
   describe 'from file' do
     it 'scan example4' do
       sb = SchulzeBasic.do File.open('spec/support/examples/vote4.list')
-      expect(sb.ranks_abc).to eq(['C:1', 'D:2', 'B:3', 'A:4'])
       expect(sb.ranks).to eq([0, 1, 3, 2])
     end
   end

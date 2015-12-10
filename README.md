@@ -167,12 +167,11 @@ The result strings are always in format `Candidate:Position`, because it's possi
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-## TODO
+## Problems? Questions?
 
-* ranks_abc method doesn't work properly
-* Implement a Tie-Breaking Ranking of the Candidates alghoritm
+![Alessandro Rodi](http://www.gravatar.com/avatar/32d80da41830a6e6c1bb3eb977537e3e)
 
 ## Copyright
 
-Copyright (c) 2011 Christoph Grabo. See LICENSE.txt for further details.
+See LICENSE for further details.
 
