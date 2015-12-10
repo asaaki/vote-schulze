@@ -4,12 +4,12 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{vote-schulze}
+  s.name = %q{schulze-vote}
   s.version = '2.0.0'
 
   s.required_rubygems_version = Gem::Requirement.new('>= 0') if s.respond_to? :required_rubygems_version=
   s.authors = ['Alessandro Rodi']
-  s.date = %q{2015-02-07}
+  s.date = %q{2015-12-10}
   s.description = %q{This gem is a Ruby implementation of the Schulze voting method (with help of the Floyd-Warshall algorithm), a type of the Condorcet voting methods.}
   s.email = %q{coorasse@gmail.com}
   s.extra_rdoc_files = [
@@ -17,7 +17,6 @@ Gem::Specification.new do |s|
     'README.md'
   ]
   s.files = [
-    '.document',
     '.rspec',
     'Gemfile',
     'Gemfile.lock',
@@ -27,7 +26,7 @@ Gem::Specification.new do |s|
     'VERSION',
     'examples/vote4.list',
     'examples/vote6.list',
-    'lib/vote-schulze.rb',
+    'lib/schulze-vote.rb',
     'lib/vote.rb',
     'lib/vote/condorcet.rb',
     'lib/vote/condorcet/schulze.rb',
@@ -36,10 +35,10 @@ Gem::Specification.new do |s|
     'lib/vote/condorcet/schulze/win_and_lost.rb',
     'lib/vote/matrix.rb',
     'spec/spec_helper.rb',
-    'spec/vote-schulze_spec.rb',
-    'vote-schulze.gemspec'
+    'spec/schulze_vote_spec.rb',
+    'schulze-vote.gemspec'
   ]
-  s.homepage = %q{http://github.com/coorasse/vote-schulze}
+  s.homepage = %q{http://github.com/coorasse/schulze-vote}
   s.licenses = ['MIT']
   s.require_paths = ['lib']
   s.rubygems_version = %q{1.6.2}

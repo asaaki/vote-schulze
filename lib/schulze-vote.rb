@@ -1,8 +1,3 @@
-# encoding: UTF-8
-
-# $:<<`pwd`.strip
-# require 'vote-schulze'
-
 require 'matrix'
 require 'vote'
 require 'vote/matrix'
