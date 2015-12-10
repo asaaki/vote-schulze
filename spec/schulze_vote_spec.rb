@@ -1,13 +1,12 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe 'VoteSchulze' do
+describe 'SchulzeVote' do
   describe 'really simple vote with A=B' do
     it 'can solve a simple votation' do
       # the vote is A > B
       votestring = 'A,B'
       vs = SchulzeBasic.do votestring, 2
       expect(vs.ranks).to eq [0, 0]
-      #expect(vs.ranks_abc).to eq(['A:1', 'B:1'])
     end
 
     it 'can solve a simple votation with the number of votes preceeding' do
