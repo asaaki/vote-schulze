@@ -1,12 +1,10 @@
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-require 'rspec'
-require 'vote-schulze'
+# frozen_string_literal: true
 
-# Requires supporting files with custom matchers and macros, etc,
-# in ./support/ and its subdirectories.
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
+require 'bundler/setup'
+require 'vote/schulze'
 
 RSpec.configure do |config|
-  
+  config.example_status_persistence_file_path = '.rspec_status'
+  config.disable_monkey_patching!
+  config.expect_with(:rspec) { |c| c.syntax = :expect }
 end

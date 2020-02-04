@@ -21,12 +21,10 @@ gem install vote-schulze
 
 ``` ruby
 require 'vote-schulze'
-vs = SchulzeBasic.do vote_list, candidate_count
+vs = Vote::Schulze::Basic.call(vote_list, candidate_count)
 vs.ranks
-vs.ranks_abc
+vs.ranking_abc
 ```
-
-`SchulzeBasic.do` - SchulzeBasic is a short term for `Vote::Condorcet::Schulze::Basic` and `.do` is a method of this class!
 
 Input:
 
@@ -84,8 +82,8 @@ See it as an visual reminder while coding with this gem.
 ``` ruby
 require 'vote-schulze'
 vote_list_array = [[3,2,1],[1,3,2],[3,1,2]]
-vs = SchulzeBasic.do vote_list_array, 3
-vs.ranks_abc #=> result
+vs = Vote::Schulze::Basic.call(vote_list_array, 3)
+vs.ranking_abc #=> result
 ```
 
 #### String
@@ -99,16 +97,17 @@ A;C;B
 A,C,B
 4=C;A;B
 EOF
-vs = SchulzeBasic.do vote_list_string, 3
-vs.ranks_abc #=> result
+vs = Vote::Schulze::Basic.call(vote_list_string, 3)
+vs.ranking_abc #=> result
 ```
 
 #### File
 
 ``` ruby
 require 'vote-schulze'
-vs = SchulzeBasic.do File.open('path/to/vote.list')
-vs.ranks_abc #=> result
+voting_list = File.open('path/to/vote.list')
+vs = Vote::Schulze::Basic.call(voting_list)
+vs.ranking_abc #=> result
 ```
 
 ### _preference order to weight_ example
@@ -127,17 +126,11 @@ D is on second position               == 3
 Later versions will have an automatic Preference-to-Weight algorithm.
 (Internally only integers are used for calculation of ranking.)
 
-### _SchulzeBasic_
-
-It doesn't matter if you start counting at 0 (zero) or 1 (one).
+### It doesn't matter if you start counting at 0 (zero) or 1 (one).
 
 Also it's not important, if you use jumps (like `1 3 5 9`).
 
 Internally it will only check if candidate X > candidate Y
-
-Output:
-
-* `.ranking_array` Array: numbers of total wins for each candidate `[candidate A, candidate B, candidate C, ...]`
 
 ## Example
 
@@ -148,8 +141,9 @@ Example file under `examples/vote4.list`
 Result should be:
 
 ``` ruby
-sb = SchulzeBasic.do File.open('../examples/vote4.list')
-sb.rank_abc
+voting_list = File.open('examples/vote4.list')
+voting = Vote::Schulze::Basic.call(voting_list)
+voting.ranking_abc
 #=> ["C:1", "D:2", "B:3", "A:4"]
 ```
 

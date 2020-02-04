@@ -1,0 +1,17 @@
+require:
+  - rubocop-rspec
+  - rubocop-performance
+
+AllCops:
+  DisplayCopNames: true
+  TargetRubyVersion: 2.6
+
+Style/Documentation:
+  Enabled: false
+
+# Current state is that we prefer the opposite (reduce/inject)
+Style/EachWithObject:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 120
