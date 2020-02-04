@@ -151,18 +151,14 @@ which is the same result of the reference above.
 
 The result strings are always in format `Candidate:Position`, because it's possible that multiple candidates can be on the same rank.
 
-## Contributing to vote-schulze
+## Contributing
 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Use git-flow
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+Bug reports and pull requests are welcome on GitHub at https://github.com/asaaki/vote-schulze. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
-## Copyright
+## Code of Conduct
 
-Copyright (c) 2011 Christoph Grabo. See LICENSE.txt for further details.
+Everyone interacting in the vote-schulze project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/asaaki/vote-schulze/blob/master/CODE_OF_CONDUCT.md).
 
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
