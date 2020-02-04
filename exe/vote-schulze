@@ -1,0 +1,57 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'optparse'
+require 'vote/schulze'
+
+class Cli
+  def self.call
+    new.call
+  end
+
+  def initialize
+    @options = parse_options
+    @input_file = @options[:input_file]
+  end
+
+  def parse_options # rubocop:disable Metrics/MethodLength
+    {}.tap do |options|
+      OptionParser.new do |opts|
+        opts.banner = 'Usage: vote-schulze [options]'
+
+        opts.on('-f FILE', '--file FILE', 'Input file with voting data') do |file|
+          options[:input_file] = file
+        end
+
+        # opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+        #   options[:verbose] = v
+        # end
+
+        opts.on('-h', '--help', 'Prints this help') do
+          puts opts
+          exit
+        end
+      end.parse!
+    end
+  end
+
+  def call
+    voting_data = File.open(@input_file)
+    voting = Vote::Schulze.basic(voting_data)
+    puts <<~RESULTDATA
+      Voting data:
+
+      Total amount of candidates: #{format('%5<count>i', count: voting.candidate_count)}
+      Total amount of voters:     #{format('%5<count>i', count: voting.voting_count)}
+
+      Voting result as ABC ranking:
+
+      #{voting.ranking_abc}
+
+      Note: Number represents position, 1=winner(s);
+            always listed as there can be more on same position.
+    RESULTDATA
+  end
+end
+
+Cli.call

@@ -9,7 +9,7 @@ module Vote
       end
 
       attr_reader :voting_matrix, :play_matrix, :result_matrix,
-                  :ranking, :ranking_abc, :voting_count
+                  :ranking, :ranking_abc, :candidate_count, :voting_count
 
       def initialize(voting_matrix, candidate_count = nil)
         unless voting_matrix.is_a?(Vote::Schulze::Input)
