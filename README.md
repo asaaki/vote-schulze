@@ -2,9 +2,7 @@
 
 This gem is a Ruby implementation of the Schulze voting method (with help of the Floyd–Warshall algorithm), a type of the Condorcet voting methods.
 
-**Very alpha! Only basic functionality. No tests yet!**
-
-(If you want to write the tests: fork, write, test, push request - Thanks!)
+**It's usable, but not production grade.**
 
 Wikipedia:
 
@@ -153,7 +151,8 @@ The result strings are always in format `Candidate:Position`, because it's possi
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/asaaki/vote-schulze. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/asaaki/vote-schulze.
+This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## Code of Conduct
 
