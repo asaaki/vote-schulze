@@ -16,3 +16,19 @@ Style/EachWithObject:
 
 Layout/LineLength:
   Max: 120
+
+# Since rubocop 0.80 added and needed to be configured explicitly:
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+Style/ExponentialNotation:
+  Enabled: true
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
