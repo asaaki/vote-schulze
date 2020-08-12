@@ -29,7 +29,7 @@ module Vote
         @voting_count = voting_array.size
       end
 
-      def insert_voting_string(voting_string) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+      def insert_voting_string(voting_string) # rubocop:todo all
         voting_array = []
         voting_string.split(/\n|\n\r|\r/).each do |voter|
           voter = voter.split(/=/)
