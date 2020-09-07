@@ -71,7 +71,7 @@ module Vote
       end
 
       def calculate_ranking
-        @ranking = @result_matrix.row_vectors.map { |e| e.inject(0) { |s, v| s + v } }
+        @ranking = @result_matrix.row_vectors.map(&:sum)
       end
 
       def calculate_ranking_abc
