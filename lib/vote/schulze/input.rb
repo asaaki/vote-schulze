@@ -32,18 +32,18 @@ module Vote
       def insert_voting_string(voting_string) # rubocop:todo all
         voting_array = []
         voting_string.split(/\n|\n\r|\r/).each do |voter|
-          voter = voter.split(/=/)
+          voter = voter.split('=')
           vcount = voter.size == 1 ? 1 : voter[0].to_i
 
           vcount.times do
-            tmp = voter.last.split(/;/)
+            tmp = voter.last.split(';')
             tmp2 = []
 
             tmp.map! { |e| [e, @candidate_count - tmp.index(e)] }
             # find equal-weighted candidates
             tmp.map do |e|
               if e[0].size > 1
-                e[0].split(/,/).each do |f|
+                e[0].split(',').each do |f|
                   tmp2 << [f, e[1]]
                 end
               else
