@@ -22,7 +22,7 @@ jobs:
           - 2.7
           - 2.6
           - jruby
-          # - truffleruby
+          - truffleruby
         os:
           - ubuntu-20.04
           - macos-latest
