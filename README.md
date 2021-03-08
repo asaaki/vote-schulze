@@ -1,4 +1,4 @@
-# vote-schulze ![ci](https://github.com/asaaki/vote-schulze/workflows/ci/badge.svg)
+# vote-schulze [![ci](https://github.com/asaaki/vote-schulze/actions/workflows/ci.yml/badge.svg)](https://github.com/asaaki/vote-schulze/actions/workflows/ci.yml)
 
 This gem is a Ruby implementation of the Schulze voting method (with help of the Floyd–Warshall algorithm), a type of the Condorcet voting methods.
 
