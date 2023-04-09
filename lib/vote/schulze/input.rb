@@ -35,23 +35,24 @@ module Vote
           voter = voter.split('=')
           vcount = voter.size == 1 ? 1 : voter[0].to_i
 
-          vcount.times do
-            tmp = voter.last.split(';')
-            tmp2 = []
+          tmp = voter.last.split(';')
+          tmp2 = []
 
-            tmp.map! { |e| [e, @candidate_count - tmp.index(e)] }
-            # find equal-weighted candidates
-            tmp.map do |e|
-              if e[0].size > 1
-                e[0].split(',').each do |f|
-                  tmp2 << [f, e[1]]
-                end
-              else
-                tmp2 << e
+          tmp.map! { |e| [e, @candidate_count - tmp.index(e)] }
+          # find equal-weighted candidates
+          tmp.map do |e|
+            if e[0].size > 1
+              e[0].split(',').each do |f|
+                tmp2 << [f, e[1]]
               end
+            else
+              tmp2 << e
             end
+          end
 
-            voting_array << (tmp2.sort.map { |e| e[1] }) # order, strip & add
+          vote = tmp2.sort.map { |e| e[1] } # order, strip & add
+          vcount.times do
+            voting_array << vote
           end
         end
 
