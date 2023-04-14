@@ -1,0 +1,6 @@
+4
+3=alpha;charlie;delta;bravo
+9=bravo;alpha;charlie;delta
+8=charlie;delta;alpha;bravo
+5=delta;alpha;bravo;charlie
+5=delta;bravo;charlie;alpha
