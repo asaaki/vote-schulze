@@ -18,6 +18,7 @@ module Vote
         @voting_matrix = voting_matrix.voting_matrix
         @candidate_count = voting_matrix.candidate_count
         @voting_count = voting_matrix.voting_count
+        @candidate_names = voting_matrix.candidate_names
         @play_matrix = ::Matrix.scalar(@candidate_count, 0).extend(Vote::Matrix)
         @result_matrix = ::Matrix.scalar(@candidate_count, 0).extend(Vote::Matrix)
       end
@@ -77,10 +78,13 @@ module Vote
       def calculate_ranking_abc
         @ranking_abc =
           @ranking
-          .map { |e| [e, (@ranking.index(e) + 65).chr] }
+          .map { |e| [e, @candidate_names[@ranking.index(e)]] }
           .sort
           .reverse
-          .map { |e| "#{e[1]}:#{@ranking.max - e[0] + 1}" } # => "letter:int"
+          .map do |e|
+            "#{e[1].length == 1 ? e[1].upcase : e[1]}:" +
+            "#{@ranking.max - e[0] + 1}"
+           end
       end
     end
   end
