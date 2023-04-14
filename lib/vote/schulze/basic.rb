@@ -79,7 +79,7 @@ module Vote
       def calculate_ranking_abc
         @ranking_abc =
           @ranking
-          .map { |e| [e, @candidate_names[@ranking.index(e)]] }
+          .map.with_index { |e, i| [e, @candidate_names[i]] }
           .sort
           .reverse
           .map do |e|
