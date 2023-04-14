@@ -11,4 +11,13 @@ RSpec.describe Vote::Schulze::Basic do
       expect(voting.ranking_abc).to eq(expected_result)
     end
   end
+  context 'when input is with names' do
+    let(:input_data) { File.open('examples/vote4names.list') }
+    let(:expected_result) { ['charlie:1', 'delta:2', 'bravo:3', 'alpha:4'] }
+    let(:voting) { described_class.call(input_data) }
+
+    it 'produces ranks by name' do
+      expect(voting.ranking_abc).to eq(expected_result)
+    end
+  end
 end
