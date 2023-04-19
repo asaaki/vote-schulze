@@ -10,7 +10,7 @@ module Vote
 
       attr_reader :voting_matrix, :play_matrix, :result_matrix,
                   :ranking, :ranking_abc, :candidate_count, :voting_count,
-                  :candidate_names
+                  :candidate_names, :votes
 
       def initialize(voting_matrix, candidate_count = nil)
         unless voting_matrix.is_a?(Vote::Schulze::Input)
@@ -20,6 +20,7 @@ module Vote
         @candidate_count = voting_matrix.candidate_count
         @voting_count = voting_matrix.voting_count
         @candidate_names = voting_matrix.candidate_names
+        @votes = voting_matrix.votes
         @play_matrix = ::Matrix.scalar(@candidate_count, 0).extend(Vote::Matrix)
         @result_matrix = ::Matrix.scalar(@candidate_count, 0).extend(Vote::Matrix)
       end
