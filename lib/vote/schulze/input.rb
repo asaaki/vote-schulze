@@ -4,7 +4,7 @@ module Vote
   module Schulze
     class Input
       attr_reader :candidate_count, :voting_count, :voting_matrix,
-        :candidate_names, :votes
+                  :candidate_names, :votes
 
       def initialize(voting_data, candidate_count = nil)
         @voting_data = voting_data

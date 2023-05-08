@@ -56,7 +56,7 @@ module Vote
               next if i == k
               next if j == k
 
-              @play_matrix[j, k] = [
+              @play_matrix[j, k] = [ # rubocop:disable Style/ComparableClamp
                 @play_matrix[j, k],
                 [@play_matrix[j, i], @play_matrix[i, k]].min
               ].max
@@ -83,10 +83,9 @@ module Vote
           .map.with_index { |e, i| [e, @candidate_names[i]] }
           .sort
           .reverse
-          .map do |e|
-            "#{e[1].length == 1 ? e[1].upcase : e[1]}:" +
-            "#{@ranking.max - e[0] + 1}"
-           end
+          .map do |(idx, name)|
+            "#{name.length == 1 ? name.upcase : name}:#{@ranking.max - idx + 1}"
+          end
       end
     end
   end

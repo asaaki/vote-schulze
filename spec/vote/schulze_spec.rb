@@ -2,7 +2,7 @@
 
 RSpec.describe Vote::Schulze do
   it 'has a version number' do
-    expect(Vote::Schulze::VERSION).not_to be nil
+    expect(Vote::Schulze::VERSION).not_to be_nil
   end
 
   # example calculation based on http://blog.cgiesel.de/schulze-methode/
