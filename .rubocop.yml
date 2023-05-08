@@ -5,12 +5,12 @@ require:
 
 AllCops:
   DisplayCopNames: true
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 3.0
   NewCops: enable
 
 Layout/EndOfLine:
   EnforcedStyle: lf
- 
+
 Layout/LineLength:
   Max: 120
 
