@@ -4,22 +4,23 @@ module Vote
   module Schulze
     class Basic
       # All-in-One class method to get a calculated SchulzeBasic object
-      def self.call(voting_matrix, candidate_count = nil)
-        new(voting_matrix, candidate_count).call
+      def self.call(voting_data, candidate_count = nil)
+        new(voting_data, candidate_count).call
       end
 
       attr_reader :voting_matrix, :play_matrix, :result_matrix,
                   :ranking, :ranking_abc, :candidate_count, :voting_count,
-                  :candidate_names
+                  :candidate_names, :votes
 
-      def initialize(voting_matrix, candidate_count = nil)
-        unless voting_matrix.is_a?(Vote::Schulze::Input)
-          voting_matrix = Vote::Schulze::Input.new(voting_matrix, candidate_count)
+      def initialize(voting_data, candidate_count = nil)
+        unless voting_data.is_a?(Vote::Schulze::Input)
+          voting_data = Vote::Schulze::Input.new(voting_data, candidate_count)
         end
-        @voting_matrix = voting_matrix.voting_matrix
-        @candidate_count = voting_matrix.candidate_count
-        @voting_count = voting_matrix.voting_count
-        @candidate_names = voting_matrix.candidate_names
+        @voting_matrix = voting_data.voting_matrix
+        @candidate_count = voting_data.candidate_count
+        @voting_count = voting_data.voting_count
+        @candidate_names = voting_data.candidate_names
+        @votes = voting_data.votes
         @play_matrix = ::Matrix.scalar(@candidate_count, 0).extend(Vote::Matrix)
         @result_matrix = ::Matrix.scalar(@candidate_count, 0).extend(Vote::Matrix)
       end

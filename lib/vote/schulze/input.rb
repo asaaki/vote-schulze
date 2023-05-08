@@ -4,7 +4,7 @@ module Vote
   module Schulze
     class Input
       attr_reader :candidate_count, :voting_count, :voting_matrix,
-        :candidate_names
+        :candidate_names, :votes
 
       def initialize(voting_data, candidate_count = nil)
         @voting_data = voting_data
@@ -20,6 +20,7 @@ module Vote
       end
 
       def insert_voting_array(voting_array)
+        @votes = voting_array
         voting_array.each do |vote|
           @voting_matrix.each_with_index do |_e, x, y|
             next if x == y
