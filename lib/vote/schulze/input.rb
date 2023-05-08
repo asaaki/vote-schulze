@@ -3,7 +3,8 @@
 module Vote
   module Schulze
     class Input
-      attr_reader :candidate_count, :voting_count, :voting_matrix
+      attr_reader :candidate_count, :voting_count, :voting_matrix,
+        :candidate_names
 
       def initialize(voting_data, candidate_count = nil)
         @voting_data = voting_data
@@ -50,6 +51,7 @@ module Vote
             end
           end
 
+          @candidate_names ||= tmp2.map { |e| e[0] }.sort
           vote = tmp2.sort.map { |e| e[1] } # order, strip & add
           vcount.times do
             voting_array << vote

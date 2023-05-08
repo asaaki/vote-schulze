@@ -9,7 +9,8 @@ module Vote
       end
 
       attr_reader :voting_matrix, :play_matrix, :result_matrix,
-                  :ranking, :ranking_abc, :candidate_count, :voting_count
+                  :ranking, :ranking_abc, :candidate_count, :voting_count,
+                  :candidate_names
 
       def initialize(voting_matrix, candidate_count = nil)
         unless voting_matrix.is_a?(Vote::Schulze::Input)
@@ -18,6 +19,7 @@ module Vote
         @voting_matrix = voting_matrix.voting_matrix
         @candidate_count = voting_matrix.candidate_count
         @voting_count = voting_matrix.voting_count
+        @candidate_names = voting_matrix.candidate_names
         @play_matrix = ::Matrix.scalar(@candidate_count, 0).extend(Vote::Matrix)
         @result_matrix = ::Matrix.scalar(@candidate_count, 0).extend(Vote::Matrix)
       end
@@ -77,10 +79,13 @@ module Vote
       def calculate_ranking_abc
         @ranking_abc =
           @ranking
-          .map { |e| [e, (@ranking.index(e) + 65).chr] }
+          .map.with_index { |e, i| [e, @candidate_names[i]] }
           .sort
           .reverse
-          .map { |e| "#{e[1]}:#{@ranking.max - e[0] + 1}" } # => "letter:int"
+          .map do |e|
+            "#{e[1].length == 1 ? e[1].upcase : e[1]}:" +
+            "#{@ranking.max - e[0] + 1}"
+           end
       end
     end
   end
