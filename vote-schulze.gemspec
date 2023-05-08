@@ -29,13 +29,13 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'matrix', '>= 0.4.2'
 
-  spec.add_development_dependency 'bundler', '~> 2.1'
+  spec.add_development_dependency 'bundler', '~> 2.4'
   spec.add_development_dependency 'rake', '~> 13.0'
-  spec.add_development_dependency 'rspec', '~> 3.9'
-  spec.add_development_dependency 'rubocop', '~> 0.82'
-  spec.add_development_dependency 'rubocop-performance', '~> 1.5'
-  spec.add_development_dependency 'rubocop-rake', '~> 0.5'
-  spec.add_development_dependency 'rubocop-rspec', '~> 1.39'
+  spec.add_development_dependency 'rspec', '~> 3.12'
+  spec.add_development_dependency 'rubocop', '~> 1.50'
+  spec.add_development_dependency 'rubocop-performance', '~> 1.10'
+  spec.add_development_dependency 'rubocop-rake', '~> 0.6'
+  spec.add_development_dependency 'rubocop-rspec', '~> 2.22'
 
   spec.metadata['rubygems_mfa_required'] = 'true'
 end

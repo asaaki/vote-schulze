@@ -9,6 +9,7 @@ GEM
   specs:
     ast (2.4.2)
     diff-lcs (1.5.0)
+    json (2.6.3)
     matrix (0.4.2)
     parallel (1.23.0)
     parser (3.2.2.1)
@@ -30,40 +31,46 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
     rspec-support (3.12.0)
-    rubocop (0.93.1)
+    rubocop (1.50.2)
+      json (~> 2.3)
       parallel (~> 1.10)
-      parser (>= 2.7.1.5)
+      parser (>= 3.2.0.0)
       rainbow (>= 2.2.2, < 4.0)
-      regexp_parser (>= 1.8)
-      rexml
-      rubocop-ast (>= 0.6.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml (>= 3.2.5, < 4.0)
+      rubocop-ast (>= 1.28.0, < 2.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (>= 1.4.0, < 2.0)
+      unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.28.1)
       parser (>= 3.2.1.0)
+    rubocop-capybara (2.18.0)
+      rubocop (~> 1.41)
+    rubocop-factory_bot (2.22.0)
+      rubocop (~> 1.33)
     rubocop-performance (1.10.2)
       rubocop (>= 0.90.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    rubocop-rake (0.5.1)
-      rubocop
-    rubocop-rspec (1.44.1)
-      rubocop (~> 0.87)
-      rubocop-ast (>= 0.7.1)
+    rubocop-rake (0.6.0)
+      rubocop (~> 1.0)
+    rubocop-rspec (2.22.0)
+      rubocop (~> 1.33)
+      rubocop-capybara (~> 2.17)
+      rubocop-factory_bot (~> 2.22)
     ruby-progressbar (1.13.0)
-    unicode-display_width (1.8.0)
+    unicode-display_width (2.4.2)
 
 PLATFORMS
   ruby
   x64-mingw32
 
 DEPENDENCIES
-  bundler (~> 2.1)
+  bundler (~> 2.4)
   rake (~> 13.0)
-  rspec (~> 3.9)
-  rubocop (~> 0.82)
-  rubocop-performance (~> 1.5)
-  rubocop-rake (~> 0.5)
-  rubocop-rspec (~> 1.39)
+  rspec (~> 3.12)
+  rubocop (~> 1.50)
+  rubocop-performance (~> 1.10)
+  rubocop-rake (~> 0.6)
+  rubocop-rspec (~> 2.22)
   vote-schulze!
 
 BUNDLED WITH
