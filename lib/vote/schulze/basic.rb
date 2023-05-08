@@ -56,7 +56,7 @@ module Vote
               next if i == k
               next if j == k
 
-              @play_matrix[j, k] = [ # rubocop:disable Style/ComparableClamp
+              @play_matrix[j, k] = [
                 @play_matrix[j, k],
                 [@play_matrix[j, i], @play_matrix[i, k]].min
               ].max

@@ -26,3 +26,7 @@ Style/EachWithObject:
 # Sorry, community, but I don't think it's a good choice.
 Style/GlobalStdStream:
   Enabled: false
+
+# some rubocop versions report on this, but we don't want to change the code for this;
+Style/ComparableClamp:
+  Enabled: false
