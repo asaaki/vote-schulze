@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    vote-schulze (0.3.0)
+    vote-schulze (0.4.0)
       matrix (>= 0.4.2)
 
 GEM
