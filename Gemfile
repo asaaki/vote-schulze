@@ -10,7 +10,7 @@ gemspec
 gem 'bundler', '~> 2.4'
 gem 'rake', '~> 13.0'
 gem 'rspec', '~> 3.12'
-gem 'rubocop', '~> 1.56'
+gem 'rubocop', '~> 1.57'
 gem 'rubocop-performance', '~> 1.19'
 gem 'rubocop-rake', '~> 0.6'
 gem 'rubocop-rspec', '~> 2.24'
