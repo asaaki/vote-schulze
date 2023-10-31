@@ -8,7 +8,7 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 gemspec
 
 gem 'bundler', '~> 2.4'
-gem 'rake', '~> 13.0'
+gem 'rake', '~> 13.1'
 gem 'rspec', '~> 3.12'
 gem 'rubocop', '~> 1.57'
 gem 'rubocop-performance', '~> 1.19'
