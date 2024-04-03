@@ -56,10 +56,13 @@ GEM
       rubocop-ast (>= 1.31.1, < 2.0)
     rubocop-rake (0.6.0)
       rubocop (~> 1.0)
-    rubocop-rspec (2.27.1)
+    rubocop-rspec (2.28.0)
       rubocop (~> 1.40)
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
+      rubocop-rspec_rails (~> 2.28)
+    rubocop-rspec_rails (2.28.2)
+      rubocop (~> 1.40)
     ruby-progressbar (1.13.0)
     unicode-display_width (2.5.0)
 
@@ -74,7 +77,7 @@ DEPENDENCIES
   rubocop (~> 1.62)
   rubocop-performance (~> 1.21)
   rubocop-rake (~> 0.6)
-  rubocop-rspec (~> 2.27)
+  rubocop-rspec (~> 2.28)
   vote-schulze!
 
 BUNDLED WITH
